@@ -28,7 +28,7 @@ def bot():
         # return a cat pic
         msg.media('https://cataas.com/cat')
         responded = True
-    #if responded == False:
+    # if responded == False:
     if not responded:
         msg.body('I only know about famous quotes and cats, sorry!')
     return str(resp)
