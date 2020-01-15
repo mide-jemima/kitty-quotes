@@ -34,13 +34,17 @@ def bot():
     # if responded == False:
 
     if 'translate' in incoming_msg:
-        message = incoming_message.split(' from ')
-        trans_lang = dict[message[1].split(' to ')[1].capitalize()]
-        trans_text = message[0][10:]
-        translator = Translator(to_lang=trans_lang, from_lang='autodetect')
-        translation = translator.translate(trans_text)
-        msg.body(translation)
-        responded = True
+        try:
+            message = incoming_message.split(' to ')
+            trans_lang = dict[message[1].capitalize()]
+            trans_text = message[0][10:]
+            translator = Translator(to_lang=trans_lang, from_lang='autodetect')
+            translation = translator.translate(trans_text)
+            msg.body(translation)
+            responded = True
+        except IndexError:
+            error = "Please follow the pattern, 'Translate \"your text\" to \"language\""
+            msg.body(error)
 
     if not responded:
         msg.body('I only know about famous quotes and cats, sorry!')
